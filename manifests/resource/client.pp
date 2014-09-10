@@ -12,12 +12,15 @@
 class openafs::resource::client (
   $package_name = $openafs::resource::client::params::package_name,
   $service_name = $openafs::resource::client::params::service_name,
+  $sysname = false,
 ) inherits openafs::resource::client::params {
 
   # validate parameters here
 
   class { 'openafs::resource::client::install': } ->
-  class { 'openafs::resource::client::config': } ~>
+  class { 'openafs::resource::client::config':
+    sysname => $sysname
+  } ~>
   class { 'openafs::resource::client::service': } ->
   Class['openafs::resource::client']
 }
