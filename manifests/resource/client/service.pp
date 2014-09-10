@@ -17,10 +17,12 @@ class openafs::resource::client::service (
     present: {
       $service_ensure = running
       $service_enable = true
+      $unload_module = false
     }
     absent: {
       $service_ensure = stopped
       $service_enable = false
+      $unload_module = true
     }
     default: {
       fail("Unsupported ensure value `${ensure}`")
@@ -32,5 +34,10 @@ class openafs::resource::client::service (
     hasstatus  => $openafs::resource::client::params::service_hasstatus,
     status     => $openafs::resource::client::params::service_status,
     hasrestart => true,
+  }
+  if $unload_module {
+    exec { 'openafs_resource_client_unload_module':
+      command => 'rmmod openafs'
+    }
   }
 }
