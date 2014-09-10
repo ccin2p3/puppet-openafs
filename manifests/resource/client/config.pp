@@ -10,19 +10,32 @@
 # It manages how the resource 'client' is configured
 #
 class openafs::resource::client::config (
-  $sysname = false
+  $sysname = false,
+  $ensure = $::openafs::ensure
 )
 {
   # force sysname to user specified value
-  if $sysname {
-    augeas { 'setup sysname in post_init':
-      incl    => $::openafs::resource::client::params::init_defaults,
-      lens    => 'Shellvars.lns',
-      changes => "set AFS_POST_INIT \"'fs sysname ${sysname}'\""
+  case $ensure {
+    present: {
+      if $sysname {
+        augeas { 'setup sysname in post_init':
+          incl    => $::openafs::resource::client::params::init_defaults,
+          lens    => 'Shellvars.lns',
+          changes => "set AFS_POST_INIT \"'fs sysname ${sysname}'\""
+        }
+      }
+    }
+    absent: {
+      file { $::openafs::resource::client::params::init_defaults:
+        ensure => $ensure
+      }
+    }
+    default: {
+      fail("ensure `${ensure}` is not supported")
     }
   }
   file { $::openafs::resource::client::params::this_cell_file:
-    ensure  => present,
+    ensure  => $ensure,
     content => "${::openafs::config::cell_name}\n"
   }
   

@@ -14,14 +14,17 @@ class openafs::resource::client::params {
     'Debian': {
       $package_name = 'openafs-client'
       $service_name = 'openafs-client'
+      $service_hasstatus = true
       $config_file = '/etc/openafs.conf'
       $config_include_dir = '/etc/openafs/conf.d'
       $init_defaults = '/etc/openafs/afs.conf'
       $this_cell_file = '/etc/openafs/ThisCell'
     }
     'RedHat', 'Amazon': {
-      $package_name = ['openafs-client','openafs-compat','pam_afs_session','kmod-openafs']
+      $package_name = ['openafs-client','openafs-compat','pam_afs_session', 'kmod-openafs']
       $service_name = 'afs'
+      $service_hasstatus = false
+      $service_status = 'pgrep -x afsd'
       $config_file = '/etc/openafs.conf'
       $config_include_dir = '/etc/openafs/conf.d'
       $init_defaults = '/etc/sysconfig/afs'

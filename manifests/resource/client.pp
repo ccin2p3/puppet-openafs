@@ -10,17 +10,24 @@
 # it sets up the client part of openafs
 #
 class openafs::resource::client (
+  $ensure = present,
   $package_name = $openafs::resource::client::params::package_name,
   $service_name = $openafs::resource::client::params::service_name,
   $sysname = false,
 ) inherits openafs::resource::client::params {
+  include openafs
 
   # validate parameters here
 
-  class { 'openafs::resource::client::install': } ->
+  class { 'openafs::resource::client::install':
+    ensure  => $ensure
+  } ->
   class { 'openafs::resource::client::config':
-    sysname => $sysname
+    sysname => $sysname,
+    ensure  => $ensure
   } ~>
-  class { 'openafs::resource::client::service': } ->
+  class { 'openafs::resource::client::service':
+    ensure  => $ensure
+  } ->
   Class['openafs::resource::client']
 }
