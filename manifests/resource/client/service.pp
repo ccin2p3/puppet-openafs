@@ -37,6 +37,7 @@ class openafs::resource::client::service (
   }
   if $unload_module {
     exec { 'openafs_resource_client_unload_module':
+      path    => '/sbin',
       command => 'rmmod openafs'
     }
   }
