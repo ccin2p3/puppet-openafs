@@ -34,7 +34,7 @@ class openafs::resource::client::config (
   }
   file { $::openafs::resource::client::params::this_cell_file:
     ensure  => $ensure,
-    content => "${::cell_name}\n"
+    content => "${cell_name}\n"
   }
   
 }
