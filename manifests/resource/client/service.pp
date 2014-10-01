@@ -35,11 +35,10 @@ class openafs::resource::client::service (
     status     => $openafs::resource::client::params::service_status,
     hasrestart => true,
   }
-  if $unload_module {
+  if $unload_module and str2bool($::kmod_isloaded_openafs) {
     exec { 'openafs_resource_client_unload_module':
       path    => '/sbin',
-      command => 'rmmod openafs',
-      onlyif  => 'modinfo openafs'
+      command => 'rmmod openafs'
     }
   }
 }
