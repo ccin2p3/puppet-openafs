@@ -1,0 +1,28 @@
+#
+ENABLE_AFSDB=on
+ENABLE_DYNROOT=on
+ENABLE_FAKESTAT=on
+ENABLE_SETTIME=off
+XXLARGE="-stat 4000 -dcache 4000 -daemons 6 -volumes 256 -files 50000"
+XLARGE="-stat 3600 -dcache 3600 -daemons 5 -volumes 196 -files 50000"
+LARGE="-stat 2800 -dcache 2400 -daemons 5 -volumes 128"
+MEDIUM="-stat 2000 -dcache 800 -daemons 3 -volumes 70"
+SMALL="-stat 300 -dcache 100 -daemons 2 -volumes 50"
+CACHESIZE=AUTOMATIC
+OPTIONS=AUTOMATIC
+AFSDIR=/afs
+CACHEDIR=/afscache
+CACHEINFO=/usr/vice/etc/cacheinfo
+
+afs_serverprefs() {
+  :
+<% if @sysname -%>
+  fs sysname <%= @sysname %>
+<% end -%>
+<% if @suid -%>
+  fs setcell <%= @cell_name %> -suid
+<% end -%>
+}
+
+AFS_POST_INIT=afs_serverprefs
+

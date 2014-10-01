@@ -11,18 +11,16 @@
 #
 class openafs::resource::client::config (
   $sysname = false,
+  $suid = false,
   $ensure = $::openafs::ensure
 )
 {
-  # force sysname to user specified value
+  $cell_name = $::openafs::config::cell_name
   case $ensure {
     present: {
-      if $sysname {
-        augeas { 'setup sysname in post_init':
-          incl    => $::openafs::resource::client::params::init_defaults,
-          lens    => 'Shellvars.lns',
-          changes => "set AFS_POST_INIT \"'fs sysname ${sysname}'\""
-        }
+      file { $::openafs::resource::client::params::init_defaults:
+        ensure  => $ensure,
+        content => template('openafs/client/sysconfig.afs.erb'),
       }
     }
     absent: {
@@ -36,7 +34,7 @@ class openafs::resource::client::config (
   }
   file { $::openafs::resource::client::params::this_cell_file:
     ensure  => $ensure,
-    content => "${::openafs::config::cell_name}\n"
+    content => "${::cell_name}\n"
   }
   
 }

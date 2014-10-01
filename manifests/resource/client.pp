@@ -14,6 +14,7 @@ class openafs::resource::client (
   $package_name = $openafs::resource::client::params::package_name,
   $service_name = $openafs::resource::client::params::service_name,
   $sysname = false,
+  $suid = false,
 ) inherits openafs::resource::client::params {
   include openafs
 
@@ -23,8 +24,9 @@ class openafs::resource::client (
     ensure  => $ensure
   } ->
   class { 'openafs::resource::client::config':
+    ensure  => $ensure,
     sysname => $sysname,
-    ensure  => $ensure
+    suid    => $suid
   } ~>
   class { 'openafs::resource::client::service':
     ensure  => $ensure
