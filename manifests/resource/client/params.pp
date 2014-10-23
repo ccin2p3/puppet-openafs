@@ -21,7 +21,14 @@ class openafs::resource::client::params {
       $this_cell_file = '/etc/openafs/ThisCell'
     }
     'RedHat', 'Amazon': {
-      $package_name = ['openafs-client','openafs-compat','pam_afs_session', 'kmod-openafs']
+      case $::operatingsystem {
+        'RedHat': {
+          $package_name = ['openafs-client','openafs-compat','pam_afs_session', 'dkms-openafs']
+        }
+        default: {
+          $package_name = ['openafs-client','openafs-compat','pam_afs_session', 'kmod-openafs']
+        }
+      }
       $service_name = 'afs'
       $service_hasstatus = false
       $service_status = 'pgrep -x afsd'
