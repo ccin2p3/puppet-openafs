@@ -24,12 +24,13 @@ class openafs::resource::client::params {
       case $::operatingsystem {
         'RedHat': {
           $package_name = ['openafs-client','openafs-compat','pam_afs_session', 'dkms-openafs']
+          $service_name = 'openafs-client'
         }
         default: {
           $package_name = ['openafs-client','openafs-compat','pam_afs_session', 'kmod-openafs']
+          $service_name = 'afs'
         }
       }
-      $service_name = 'afs'
       $service_hasstatus = false
       $service_status = 'pgrep -x afsd'
       $config_file = '/etc/openafs.conf'
