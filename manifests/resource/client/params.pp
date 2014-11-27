@@ -21,13 +21,17 @@ class openafs::resource::client::params {
       $this_cell_file = '/etc/openafs/ThisCell'
     }
     'RedHat', 'Amazon': {
+      case $::operatingsystemmajrelease {
+        '7':     { $ps = '-1.6-sl' }
+        default: { $ps = '' }
+      }
       case $::operatingsystem {
         'RedHat': {
-          $package_name = ['openafs-client','openafs-compat','pam_afs_session', 'dkms-openafs']
+          $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "dkms-openafs${ps}"]
           $service_name = 'openafs-client'
         }
         default: {
-          $package_name = ['openafs-client','openafs-compat','pam_afs_session', 'kmod-openafs']
+          $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "kmod-openafs${ps}"]
           $service_name = 'afs'
         }
       }
