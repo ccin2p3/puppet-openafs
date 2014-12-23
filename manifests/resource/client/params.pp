@@ -27,7 +27,7 @@ class openafs::resource::client::params {
       }
       case $::operatingsystem {
         'RedHat': {
-          $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "dkms-openafs${ps}"]
+          $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "kmod-openafs${ps}"]
           $service_name = 'openafs-client'
         }
         default: {
