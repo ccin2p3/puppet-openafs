@@ -25,16 +25,10 @@ class openafs::resource::client::params {
         '7':     { $ps = '-1.6-sl' }
         default: { $ps = '' }
       }
-      case $::operatingsystem {
-        'RedHat': {
-          $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "kmod-openafs${ps}"]
-          $service_name = 'openafs-client'
-        }
-        default: {
-          $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "kmod-openafs${ps}"]
-          $service_name = 'afs'
-        }
-      }
+
+      $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "kmod-openafs${ps}"]
+      $service_name = 'afs'
+
       $service_hasstatus = false
       $service_status = 'pgrep -x afsd'
       $config_file = '/etc/openafs.conf'
