@@ -10,11 +10,23 @@
 # It manages how the resource 'client' is configured
 #
 class openafs::resource::client::config (
-  $sysname = false,
-  $suid = false,
+  $postinit = {},
   $ensure = $::openafs::ensure
 )
 {
+  validate_hash($postinit)
+  if ! empty($postinit) {
+    if has_key($postinit, 'path') {
+      file{ $postinit['path']:
+        ensure  => present,
+        content => $postinit['content'],
+        source  => $postinit['source'],
+        notify  => Service['openafs'],
+      }
+    } else {
+      fail('postinit must contain at least key "path"')
+    }
+  }
   $cell_name = $::openafs::config::cell_name
   case $ensure {
     present: {

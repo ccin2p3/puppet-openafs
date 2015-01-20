@@ -13,16 +13,5 @@ OPTIONS=AUTOMATIC
 AFSDIR=/afs
 CACHEDIR=/afscache
 CACHEINFO=/usr/vice/etc/cacheinfo
-
-afs_serverprefs() {
-  :
-<% if @sysname -%>
-  fs sysname <%= @sysname %>
-<% end -%>
-<% if @suid -%>
-  fs setcell <%= @cell_name %> -suid
-<% end -%>
-}
-
-AFS_POST_INIT=afs_serverprefs
+AFS_POST_INIT=@postinit
 
