@@ -13,5 +13,5 @@ OPTIONS=AUTOMATIC
 AFSDIR=/afs
 CACHEDIR=/afscache
 CACHEINFO=/usr/vice/etc/cacheinfo
-AFS_POST_INIT=@postinit
+AFS_POST_INIT=<%= @postinit['path'] %>
 
