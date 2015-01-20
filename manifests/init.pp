@@ -21,8 +21,9 @@ class openafs (
 
   # validate parameters here
 
+  include '::openafs::config'
   class { 'openafs::install': } ->
-  class { 'openafs::config': } ~>
+  Class ['openafs::config'] ~>
   class { 'openafs::service': } ->
   Class['openafs']
 }
