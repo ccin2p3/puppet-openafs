@@ -22,6 +22,7 @@ class openafs::resource::client::config (
         content => $postinit['content'],
         source  => $postinit['source'],
         notify  => Service[$::openafs::resource::client::service_name],
+        mode    => '0755',
       }
     } else {
       fail('postinit must contain at least key "path"')
