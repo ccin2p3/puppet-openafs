@@ -37,7 +37,6 @@ class openafs::resource::client::params {
       $init_defaults = '/etc/sysconfig/afs'
       $this_cell_file = '/usr/vice/etc/ThisCell'
       $cellservdb_file = '/usr/vice/etc/CellServDB'
-      Package["openafs${ps}-client"] -> File['client_cellservdb']
     }
     default: {
       fail("${::operatingsystem} not supported")
