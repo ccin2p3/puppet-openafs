@@ -49,5 +49,9 @@ class openafs::resource::client::config (
     ensure  => $ensure,
     content => "${cell_name}\n"
   }
+  file { $::openafs::resource::client::params::cellservdb_file:
+    ensure  => $ensure,
+    source  => 'puppet:///modules/openafs/client/CellServDB',
+  }
   
 }

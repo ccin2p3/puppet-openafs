@@ -19,6 +19,7 @@ class openafs::resource::client::params {
       $config_include_dir = '/etc/openafs/conf.d'
       $init_defaults = '/etc/openafs/afs.conf'
       $this_cell_file = '/etc/openafs/ThisCell'
+      $cellservdb_file = '/etc/openafs/CellServDB'
     }
     'RedHat', 'Amazon': {
       case $::operatingsystemmajrelease {
@@ -35,6 +36,8 @@ class openafs::resource::client::params {
       $config_include_dir = '/etc/openafs/conf.d'
       $init_defaults = '/etc/sysconfig/afs'
       $this_cell_file = '/usr/vice/etc/ThisCell'
+      $cellservdb_file = '/usr/vice/etc/CellServDB'
+      Package["openafs${ps}-client"] -> File['client_cellservdb']
     }
     default: {
       fail("${::operatingsystem} not supported")
