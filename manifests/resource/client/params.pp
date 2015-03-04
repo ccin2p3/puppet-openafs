@@ -26,7 +26,7 @@ class openafs::resource::client::params {
         default: { $ps = '' }
       }
 
-      $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "kmod-openafs${ps}"]
+      $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "kmod-openafs${ps}", "openafs${ps}-krb5"]
       $service_name = 'afs'
 
       $service_hasstatus = false
