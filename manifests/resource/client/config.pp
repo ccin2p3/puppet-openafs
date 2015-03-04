@@ -50,8 +50,11 @@ class openafs::resource::client::config (
     content => "${cell_name}\n"
   }
   file { $::openafs::resource::client::params::cellservdb_file:
-    ensure  => $ensure,
-    source  => 'puppet:///modules/openafs/client/CellServDB',
+    ensure => $ensure,
+    owner  => '0',
+    group  => '0',
+    mode   => '0644',
+    source => 'puppet:///modules/openafs/client/CellServDB',
   }
   
 }

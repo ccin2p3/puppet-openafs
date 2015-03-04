@@ -26,7 +26,7 @@ class openafs::resource::client (
   class { 'openafs::resource::client::config':
     ensure  => $ensure,
     postinit => $postinit,
-  } ~>
+  } ->
   class { 'openafs::resource::client::service':
     ensure  => $ensure
   } ->
