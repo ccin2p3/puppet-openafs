@@ -49,6 +49,13 @@ class openafs::resource::client::config (
     ensure  => $ensure,
     content => "${cell_name}\n"
   }
+  unless empty ($::openafs::config::cell_alias) {
+    $cellalias = $::openafs::config::cell_alias
+    file { $::openafs::resource::client::params::cell_alias_file:
+      ensure  => present,
+      content => template('openafs/CellAlias.erb'),
+    }
+  }
   file { $::openafs::resource::client::params::cellservdb_file:
     ensure => $ensure,
     owner  => '0',
