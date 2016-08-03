@@ -15,8 +15,6 @@
 #
 class openafs (
   $ensure = present,
-  $package_name = $openafs::params::package_name,
-  $service_name = $openafs::params::service_name,
 ) inherits openafs::params {
 
   # validate parameters here
