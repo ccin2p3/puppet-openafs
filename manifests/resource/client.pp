@@ -13,21 +13,20 @@ class openafs::resource::client (
   $ensure = present,
   $package_name = $openafs::resource::client::params::package_name,
   $service_name = $openafs::resource::client::params::service_name,
-  $sysname = false,
-  $suid = false,
+  $postinit = {},
 ) inherits openafs::resource::client::params {
   include openafs
 
   # validate parameters here
+  validate_hash($postinit)
 
   class { 'openafs::resource::client::install':
     ensure  => $ensure
   } ->
   class { 'openafs::resource::client::config':
     ensure  => $ensure,
-    sysname => $sysname,
-    suid    => $suid
-  } ~>
+    postinit => $postinit,
+  } ->
   class { 'openafs::resource::client::service':
     ensure  => $ensure
   } ->

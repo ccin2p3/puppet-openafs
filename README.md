@@ -49,11 +49,14 @@ This module implemets the role/profile/resource layered [model](http://puppetlab
 include openafs::role::client
 ```
 
-Overriding `sysname`
+Setting `AFS_POST_INIT` will add the contents to the startup file. This can be used for instance to set the `sysname`:
 
 ```puppet
 class {'openafs::resource::client::config':
-  sysname => 'amd64_sl6'
+  postinit => {
+  	path => '/path/to/postinit-script',
+  	content => "fs sysname ${::architecture}_${short_operatingsystem}${::operatingsystemmajrelease}"
+  }
 }
 class {'openafs::role::client':}
 ```

@@ -1,18 +1,24 @@
 {
   "name": "ccin2p3-openafs",
-  "version": "0.1.0",
+  "version": "1.2.0",
   "source": "https://gitlab.in2p3.fr/cc-in2p3-puppet-service/module-openafs.git",
   "author": "ccin2p3",
-  "license": "CeCILL 2.1",
+  "license": "CECILL-B",
   "summary": "Puppet Module to manage openafs distributed global filesystem",
   "description": "Puppet Module to manage openafs distributed global filesystem",
   "project_page": "https://gitlab.in2p3.fr/cc-in2p3-puppet-service/module-openafs",
   "dependencies": [
-
+    { "name": "pupetlabs/stdlib","version_requirement":">= 2.4.0" }
   ],
-  "types": [
-
-  ],
-  "checksums": {
-  }
+	"requirements": [
+		{
+			"name": "puppet",
+			"version_requirement": ">=3.7.0 <4.0.0"
+		}
+	],
+	"operatingsystem_support": [
+		{ "operatingsystem": "RedHat" },
+		{ "operatingsystem": "Debian" },
+		{ "operatingsystem": "Ubuntu" }
+	]
 }

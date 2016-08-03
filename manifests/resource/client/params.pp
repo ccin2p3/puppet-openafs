@@ -19,6 +19,8 @@ class openafs::resource::client::params {
       $config_include_dir = '/etc/openafs/conf.d'
       $init_defaults = '/etc/openafs/afs.conf'
       $this_cell_file = '/etc/openafs/ThisCell'
+      $cell_alias_file = '/etc/openafs/CellAlias'
+      $cellservdb_file = '/etc/openafs/CellServDB'
     }
     'RedHat', 'Amazon': {
       case $::operatingsystemmajrelease {
@@ -26,7 +28,7 @@ class openafs::resource::client::params {
         default: { $ps = '' }
       }
 
-      $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "kmod-openafs${ps}"]
+      $package_name = ["openafs${ps}-client","openafs${ps}-compat",'pam_afs_session', "kmod-openafs${ps}", "openafs${ps}-krb5"]
       $service_name = 'afs'
 
       $service_hasstatus = false
@@ -35,6 +37,8 @@ class openafs::resource::client::params {
       $config_include_dir = '/etc/openafs/conf.d'
       $init_defaults = '/etc/sysconfig/afs'
       $this_cell_file = '/usr/vice/etc/ThisCell'
+      $cellservdb_file = '/usr/vice/etc/CellServDB'
+      $cell_alias_file = '/usr/vice/etc/CellAlias'
     }
     default: {
       fail("${::operatingsystem} not supported")
