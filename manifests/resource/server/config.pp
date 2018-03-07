@@ -10,7 +10,7 @@
 # It manages how the resource 'server' is configured
 #
 class openafs::resource::server::config (
-  $admins = ['admin']
+  Array[String[1]] $admins = ['admin']
 )
 {
   $cell_name = $::openafs::config::cell_name

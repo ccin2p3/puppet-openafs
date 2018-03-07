@@ -14,10 +14,8 @@
 #   Explanation of what this parameter affects and what it defaults to.
 #
 class openafs (
-  $ensure,
+  Enum['present', 'absent'] $ensure,
 ) {
-
-  # validate parameters here
 
   class { 'openafs::install': }
   include ::openafs::config

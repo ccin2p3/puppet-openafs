@@ -10,7 +10,7 @@
 # It ensure the package is installed
 #
 class openafs::resource::server::install (
-  $ensure = 'present'
+  Enum['present','absent'] $ensure = 'present',
 )
 {
   include ::openafs::resource::server

@@ -10,7 +10,7 @@
 # It ensures the service is running
 #
 class openafs::resource::server::service (
-  $ensure = $::openafs::ensure
+  Enum['present','absent'] $ensure = $::openafs::ensure,
 )
 {
   include ::openafs::resource::server

@@ -10,12 +10,11 @@
 # It manages how the resource 'client' is configured
 #
 class openafs::resource::client::config (
-  $postinit = {},
-  $ensure = $::openafs::ensure
+  Hash $postinit = {},
+  Enum['present', 'absent'] $ensure = $::openafs::ensure,
 )
 {
   include ::openafs::resource::client
-  validate_hash($postinit)
   if ! empty($postinit) {
     if has_key($postinit, 'path') {
       file{ $postinit['path']:

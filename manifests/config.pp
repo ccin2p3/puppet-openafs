@@ -9,10 +9,9 @@
 # This class is called from openafs
 #
 class openafs::config (
-  $cell_name = $::domain,
-  $cell_alias = {}
+  String[1] $cell_name = $::domain,
+  Hash[String,String] $cell_alias = {}
 )
 {
-  validate_string($cell_name)
-  validate_hash($cell_alias)
+  # I wonder if this class is still needed ◔̯◔
 }
