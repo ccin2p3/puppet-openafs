@@ -14,8 +14,8 @@
 #   Explanation of what this parameter affects and what it defaults to.
 #
 class openafs (
-  $ensure = present,
-) inherits openafs::params {
+  $ensure,
+) {
 
   # validate parameters here
 

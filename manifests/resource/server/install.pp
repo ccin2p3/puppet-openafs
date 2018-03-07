@@ -4,16 +4,16 @@
 # Contributor(s) : ccin2p3
 #
 
-# == Class openafs::resource::client
+# == Class openafs::resource::server
 #
-# This class is meant to be called from openafs::resource::client
+# This class is meant to be called from openafs::resource::server
 # It ensure the package is installed
 #
-class openafs::resource::client::install (
+class openafs::resource::server::install (
   $ensure = 'present'
 )
 {
-  include ::openafs::resource::client
+  include ::openafs::resource::server
   case $ensure {
     present: {
       $package_ensure = present
@@ -25,7 +25,7 @@ class openafs::resource::client::install (
       fail("Unsupported ensure value `${ensure}`")
     }
   }
-  package { $openafs::resource::client::package_name:
+  package { $openafs::resource::server::package_name:
     ensure    => $package_ensure,
   }
 }

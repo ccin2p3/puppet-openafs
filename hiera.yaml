@@ -1,0 +1,10 @@
+---
+version: 5
+defaults:
+  datadir: data
+  data_hash: yaml_data
+hierarchy:
+  - name: os.release.major
+    path: os/%{os.name}/%{os.release.major}/default.yaml
+  - name: os.default
+    path: os/default.yaml

@@ -10,11 +10,17 @@
 # it sets up the client part of openafs
 #
 class openafs::resource::client (
-  $ensure = present,
-  $package_name = $openafs::resource::client::params::package_name,
-  $service_name = $openafs::resource::client::params::service_name,
-  $postinit = {},
-) inherits openafs::resource::client::params {
+  $ensure,
+  $package_name,
+  $service_name,
+  $service_hasstatus,
+  $service_status,
+  $init_defaults,
+  $this_cell_file,
+  $cellservdb_file,
+  $cell_alias_file,
+  $postinit,
+) {
   include openafs
 
   # validate parameters here

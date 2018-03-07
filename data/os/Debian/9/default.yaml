@@ -1,0 +1,14 @@
+---
+openafs::resource::client::ensure: present
+openafs::resource::client::package_name: openafs-client
+openafs::resource::client::service_name: openafs-client
+openafs::resource::client::service_hasstatus: true
+openafs::resource::client::config_file: /etc/openafs.conf
+openafs::resource::client::config_include_dir: /etc/openafs/conf.d
+openafs::resource::client::init_defaults: /etc/openafs/afs.conf
+openafs::resource::client::this_cell_file: /etc/openafs/ThisCell
+openafs::resource::client::cellservdb_file: /etc/openafs/CellServDB
+openafs::resource::client::cell_alias_file: /etc/openafs/CellAlias
+openafs::resource::client::postinit: {}
+
+

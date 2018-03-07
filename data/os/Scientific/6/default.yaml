@@ -1,0 +1,23 @@
+---
+openafs::resource::server::package_name:
+  - openafs-server
+  - openafs-compat
+openafs::resource::client::ensure: present
+openafs::resource::client::package_name:
+  - openafs-client
+  - openafs-compat
+  - openafs-krb5
+  - pam_afs_session
+  - kmod-openafs
+openafs::resource::client::service_name: afs
+openafs::resource::client::service_hasstatus: false
+openafs::resource::client::service_status: 'pgrep -x afsd'
+openafs::resource::client::config_file: /etc/openafs.conf
+openafs::resource::client::config_include_dir: /etc/openafs/conf.d
+openafs::resource::client::init_defaults: /etc/sysconfig/afs
+openafs::resource::client::this_cell_file: /usr/vice/etc/ThisCell
+openafs::resource::client::cellservdb_file: /usr/vice/etc/CellServDB
+openafs::resource::client::cell_alias_file: /usr/vice/etc/CellAlias
+openafs::resource::client::postinit: {}
+
+
