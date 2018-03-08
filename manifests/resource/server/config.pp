@@ -10,25 +10,46 @@
 # It manages how the resource 'server' is configured
 #
 class openafs::resource::server::config (
-  Array[String[1]] $admins = ['admin']
+  Array[String[1]] $admins = ['admin'],
+  Array[Hash[String[1],String[1]]] $dbservers,
+  Enum['present','absent'] $ensure,
+  String[2] $dir,
 )
 {
+  include ::openafs::resource::server
+  case $ensure {
+    present: {
+      $dir_ensure = 'directory'
+    }
+    absent: {
+      $dir_ensure = $ensure
+    }
+  }
   $cell_name = $::openafs::config::cell_name
-  file { $::openafs::resource::server::config_dir:
-    ensure  => directory,
+  file { $dir:
+    ensure  => $dir_ensure,
   }
-  file { "${::openafs::resource::server::config_dir}/UserList":
-    ensure  => present,
-    content => inline_template('<% admins.each do |a| puts a end %>'),
-    require => $::openafs::resource::server::config_dir,
+  file { "${dir}/UserList":
+    ensure  => $ensure,
+    content => join($admins,"\n"),
+    require => File[$dir],
   }
-  file { "${::openafs::resource::server::config_dir}/ThisCell":
-    ensure  => present,
-    content => $cell_name,
-    require => $::openafs::resource::server::config_dir,
+  file { "${dir}/ThisCell":
+    ensure  => $ensure,
+    content => "${cell_name}\n",
+    require => File[$dir],
   }
-  openafs::resource::cellservdb { "${::openafs::resource::server::config_dir}/CellServDB": }
-  Openafs::Resource::Cellservdb::Fragment <<| cell_name == $cell_name |>> {
-    target => "${::openafs::resource::server::config_dir}/CellServDB"
+  file { "${dir}/CellServDB":
+    ensure => $ensure,
+    owner  => '0',
+    group  => '0',
+    mode   => '0644',
+    content => epp(
+      'openafs/server/CellServDB.epp',
+      {
+        'dbservers' => $dbservers,
+        'cell_name' => $cell_name,
+      }
+    ),
   }
 }

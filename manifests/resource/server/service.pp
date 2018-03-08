@@ -33,7 +33,6 @@ class openafs::resource::server::service (
     ensure     => $service_ensure,
     enable     => $service_enable,
     hasstatus  => $openafs::resource::server::service_hasstatus,
-    status     => $openafs::resource::server::service_status,
     hasrestart => true,
   }
   if $unload_module and str2bool($::kmod_isloaded_openafs) {

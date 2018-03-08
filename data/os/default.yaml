@@ -3,8 +3,10 @@ openafs::ensure: present
 openafs::resource::server::ensure: present
 openafs::resource::server::service_hasstatus: true
 openafs::resource::server::service_name: afs-server
-openafs::resource::server::config_dir: /usr/afs/etc
+openafs::resource::server::config::dir: /usr/afs/etc
 openafs::resource::client::ensure: present
 openafs::resource::client::postinit: {}
 
+openafs::resource::server::config::admins:
+  - admin
 
