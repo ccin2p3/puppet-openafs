@@ -10,6 +10,5 @@
 # to be able to read and write to openafs
 #
 class openafs::role::client {
-  include '::openafs::role'
   include '::openafs::profile::client'
 }
