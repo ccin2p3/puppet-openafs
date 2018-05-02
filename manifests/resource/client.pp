@@ -20,6 +20,8 @@ class openafs::resource::client (
   String[2] $cellservdb_file,
   String[2] $cell_alias_file,
   Hash $postinit,
+  Boolean $force_current_kernel_module_install,
+  String[1] $kernel_module_package_prefix,
 ) {
   include openafs
 
