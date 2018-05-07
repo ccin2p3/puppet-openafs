@@ -1,3 +1,7 @@
+# 2018-05-04 Release 1.3.2
+
+* fix bug where a missing value on sl- was causing catalog failure
+
 # 2018-05-04 Release 1.3.1
 
 * fix bug where kernel module for currently running kernel was not installed

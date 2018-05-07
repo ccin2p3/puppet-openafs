@@ -1,6 +1,6 @@
 {
   "name": "ccin2p3-openafs",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "source": "https://gitlab.in2p3.fr/cc-in2p3-puppet-service/module-openafs.git",
   "author": "ccin2p3",
   "license": "CECILL-B",
