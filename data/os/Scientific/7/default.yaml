@@ -9,6 +9,7 @@ openafs::resource::client::package_name:
   - openafs-1.6-sl-krb5
   - pam_afs_session
   - kmod-openafs-1.6-sl
+openafs::resource::client::kernel_module_package_prefix: kmod-openafs-1.6-sl-
 openafs::resource::client::service_name: afs
 openafs::resource::client::service_hasstatus: false
 openafs::resource::client::service_status: 'pgrep -x afsd'
