@@ -10,11 +10,11 @@
 # It manages how the resource 'client' is configured
 #
 class openafs::resource::client::config (
-  $postinit = {},
-  $ensure = $::openafs::ensure
+  Hash $postinit = {},
+  Enum['present', 'absent'] $ensure = $::openafs::ensure,
 )
 {
-  validate_hash($postinit)
+  include ::openafs::resource::client
   if ! empty($postinit) {
     if has_key($postinit, 'path') {
       file{ $postinit['path']:
@@ -31,13 +31,13 @@ class openafs::resource::client::config (
   $cell_name = $::openafs::config::cell_name
   case $ensure {
     present: {
-      file { $::openafs::resource::client::params::init_defaults:
+      file { $::openafs::resource::client::init_defaults:
         ensure  => $ensure,
         content => template('openafs/client/sysconfig.afs.erb'),
       }
     }
     absent: {
-      file { $::openafs::resource::client::params::init_defaults:
+      file { $::openafs::resource::client::init_defaults:
         ensure => $ensure
       }
     }
@@ -45,18 +45,18 @@ class openafs::resource::client::config (
       fail("ensure `${ensure}` is not supported")
     }
   }
-  file { $::openafs::resource::client::params::this_cell_file:
+  file { $::openafs::resource::client::this_cell_file:
     ensure  => $ensure,
     content => "${cell_name}\n"
   }
   unless empty ($::openafs::config::cell_alias) {
     $cellalias = $::openafs::config::cell_alias
-    file { $::openafs::resource::client::params::cell_alias_file:
+    file { $::openafs::resource::client::cell_alias_file:
       ensure  => present,
       content => template('openafs/CellAlias.erb'),
     }
   }
-  file { $::openafs::resource::client::params::cellservdb_file:
+  file { $::openafs::resource::client::cellservdb_file:
     ensure => $ensure,
     owner  => '0',
     group  => '0',

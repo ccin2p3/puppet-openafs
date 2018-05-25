@@ -14,17 +14,11 @@
 #   Explanation of what this parameter affects and what it defaults to.
 #
 class openafs (
-  $ensure = present,
-) inherits openafs::params {
+  Enum['present', 'absent'] $ensure,
+) {
 
-  # validate parameters here
-
-  class { 'openafs::install': }
   include ::openafs::config
-  class { 'openafs::service': }
 
-  Class['openafs::install'] ->
   Class['openafs::config'] ~>
-  Class['openafs::service'] ->
   Class['openafs']
 }

@@ -405,6 +405,8 @@
 134.158.104.11                  #ccafsdb01.in2p3.fr
 134.158.104.12                  #ccafsdb02.in2p3.fr
 134.158.104.13                  #ccafsdb03.in2p3.fr
+>test.in2p3.fr          #IN2P3-TEST
+134.158.239.217                 #ccosvms0217.in2p3.fr
 >mcc.ac.gb              #University of Manchester
 130.88.203.41                   #nevis.mc.man.ac.uk
 130.88.203.144                  #eryri.mc.man.ac.uk

@@ -1,0 +1,5 @@
+<%- | Array[Hash[String[1],String[1]]] $dbservers = [], String[1] $cell_name | -%>
+><%=$cell_name%>    #Cell name
+<%- $dbservers.each |$s| { -%>
+<%=$s['ip']%>    #<%=$s['host']%>
+<%- } -%>

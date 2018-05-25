@@ -10,15 +10,20 @@
 # it sets up the client part of openafs
 #
 class openafs::resource::client (
-  $ensure = present,
-  $package_name = $openafs::resource::client::params::package_name,
-  $service_name = $openafs::resource::client::params::service_name,
-  $postinit = {},
-) inherits openafs::resource::client::params {
+  Enum['present','absent'] $ensure,
+  Variant[String[1], Array[String[1]]] $package_name,
+  String[1] $service_name,
+  Boolean $service_hasstatus,
+  String $service_status,
+  String $init_defaults,
+  String[2] $this_cell_file,
+  String[2] $cellservdb_file,
+  String[2] $cell_alias_file,
+  Hash $postinit,
+  Boolean $force_current_kernel_module_install,
+  String[1] $kernel_module_package_prefix,
+) {
   include openafs
-
-  # validate parameters here
-  validate_hash($postinit)
 
   class { 'openafs::resource::client::install':
     ensure  => $ensure
