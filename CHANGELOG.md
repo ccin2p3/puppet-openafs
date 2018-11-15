@@ -1,3 +1,7 @@
+# 2018-11-15 Release 1.4.0
+
+* add support for RedHat
+
 # 2018-05-04 Release 1.3.2
 
 * fix bug where a missing value on sl- was causing catalog failure
