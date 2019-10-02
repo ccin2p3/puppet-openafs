@@ -22,6 +22,7 @@ class openafs::resource::client (
   Hash $postinit,
   Boolean $force_current_kernel_module_install,
   String[1] $kernel_module_package_prefix,
+  Variant[String,Undef] $cellservdb_content = undef,
 ) {
   include openafs
 
@@ -29,8 +30,9 @@ class openafs::resource::client (
     ensure  => $ensure
   } ->
   class { 'openafs::resource::client::config':
-    ensure  => $ensure,
-    postinit => $postinit,
+    ensure             => $ensure,
+    postinit           => $postinit,
+    cellservdb_content => $cellservdb_content,
   } ->
   class { 'openafs::resource::client::service':
     ensure  => $ensure
