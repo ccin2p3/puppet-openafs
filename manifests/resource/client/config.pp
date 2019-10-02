@@ -67,10 +67,11 @@ class openafs::resource::client::config (
     }
   }
   file { $::openafs::resource::client::cellservdb_file:
-    ensure => $ensure,
-    owner  => '0',
-    group  => '0',
-    mode   => '0644',
-    *      => $_cellservdb_content,
+    ensure    => $ensure,
+    owner     => '0',
+    group     => '0',
+    mode      => '0644',
+    show_diff => false,
+    *         => $_cellservdb_content,
   }
 }
