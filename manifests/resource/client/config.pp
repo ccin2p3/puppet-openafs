@@ -12,6 +12,7 @@
 class openafs::resource::client::config (
   Hash $postinit = {},
   Enum['present', 'absent'] $ensure = $::openafs::ensure,
+  Variant[String,Undef] $cellservdb_content = undef,
 )
 {
   include ::openafs::resource::client
@@ -56,12 +57,20 @@ class openafs::resource::client::config (
       content => template('openafs/CellAlias.erb'),
     }
   }
+  if $cellservdb_content =~ Undef {
+    $_cellservdb_content = {
+      source => 'puppet:///modules/openafs/client/CellServDB',
+    }
+  } else {
+    $_cellservdb_content = {
+      content => $cellservdb_content
+    }
+  }
   file { $::openafs::resource::client::cellservdb_file:
     ensure => $ensure,
     owner  => '0',
     group  => '0',
     mode   => '0644',
-    source => 'puppet:///modules/openafs/client/CellServDB',
+    *      => $_cellservdb_content,
   }
-  
 }
