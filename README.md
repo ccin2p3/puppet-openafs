@@ -61,6 +61,15 @@ class {'openafs::resource::client::config':
 class {'openafs::role::client':}
 ```
 
+You can also override the shipped `CellServDB` file:
+
+```puppet
+class {'openafs::resource::client::config':
+  cellservdb_content => epp('mymodule/CellServDB.epp')
+}
+```
+
+
 ## Reference
 
 ### Class openafs

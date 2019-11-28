@@ -1,3 +1,7 @@
+# 2019-11-28 Release 1.5.0
+
+* add support for customizing cellservdb
+
 # 2018-11-15 Release 1.4.0
 
 * add support for RedHat
